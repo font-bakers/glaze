@@ -1,0 +1,7 @@
+site_name: Glaze
+repo_url: https://github.com/font-bakers/glaze
+nav:
+    - Home: index.md
+    - About:
+      - License: https://github.com/font-bakers/knead/blob/glaze/LICENSE
+theme: readthedocs
