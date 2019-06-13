@@ -31,12 +31,12 @@ develop: init venv-develop  # Set up development environment.
 
 lint-black:
 	@printf "Checking code style with black...\n"
-	black glaze/ --check --target-version=py35 --exclude=glyph_batch_pb2.py
+	black glaze/ --check --target-version=py35
 	@printf "\033[1;34mBlack passes!\033[0m\n\n"
 
 lint-pylint:
 	@printf "Checking code style with pylint...\n"
-	pylint glaze/ --rcfile=.pylintrc --ignore=glyph_batch_pb2.py
+	pylint glaze/ --rcfile=.pylintrc
 	@printf "\033[1;34mPylint passes!\033[0m\n\n"
 
 lint: lint-black lint-pylint  # Check code style with black and pylint.
@@ -49,10 +49,10 @@ test: clean  # Run tests.
 check: clean lint test  # Alias for `make clean lint test`.
 
 black:  # Format code in-place with black.
-	black glaze/ --target-version=py35 --exclude=glyph_batch_pb2.py
+	black glaze/ --target-version=py35
 
 clean:  # Clean project directories.
-	rm -rf dist/ site/ __pycache__/ *.log data/proto/
+	rm -rf dist/ site/ __pycache__/ *.log
 	find glaze/ -type d -name "__pycache__" -delete
 	find glaze/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
 
