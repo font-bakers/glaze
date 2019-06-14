@@ -53,6 +53,7 @@ black:  # Format code in-place with black.
 
 clean:  # Clean project directories.
 	rm -rf dist/ site/ __pycache__/ *.log
+	find glaze/ -type d -name "__pycache__" -exec rm -rf {} +
 	find glaze/ -type d -name "__pycache__" -delete
 	find glaze/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
 
