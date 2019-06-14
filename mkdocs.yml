@@ -2,6 +2,8 @@ site_name: Glaze
 repo_url: https://github.com/font-bakers/glaze
 nav:
     - Home: index.md
+    - Quickstart: quickstart.md
+    - Contributing: contributing.md
     - About:
       - License: https://github.com/font-bakers/glaze/blob/master/LICENSE
 theme: readthedocs
