@@ -43,8 +43,8 @@ lint: lint-black lint-pylint  # Check code style with black and pylint.
 
 test: clean  # Run tests.
 	@printf "Running test script...\n"
+	pytest
 	${SHELL} scripts/test.sh
-	${PYTHON} scripts/test_library.py
 	@printf "\033[1;34mTests pass!\033[0m\n\n"
 
 check: clean lint test  # Alias for `make clean lint test`.

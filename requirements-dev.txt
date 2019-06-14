@@ -3,6 +3,7 @@ black
 bumpversion
 mkdocs
 pylint
+pytest
 setuptools
 twine
 wheel
