@@ -1,10 +1,18 @@
 #!/bin/python
+
 from absl import flags, app
 
 FLAGS = flags.FLAGS
 
+FILE_FORMATS = ["png", "jpg", "pdf"]
 
-def visualize():
+flags.DEFINE_string("input", None, "Input.")
+flags.mark_flag_as_required("input")
+flags.DEFINE_string("output", None, "Output.")
+flags.DEFINE_enum("format", "png", FILE_FORMATS, "Format.")
+
+
+def visualize(argv):
     pass
 
 

@@ -36,11 +36,8 @@ To run `glaze` on the command line:
 glaze --input INPUT [--output OUTPUT_PATH --format FORMAT]
 ```
 
-`--input` must be one of:
-
-- a `.json` file (such as those produced by `knead`)
-- a `.npy` file,
-- a directory containing such files.
+`--input` is a `.json` file (such as those produced by `knead`), or a directory
+containing such `.json` files.
 
 `--output` is the path to the desired location of the output images. If
 `--output` is not specified, it defaults to the present working directory.
