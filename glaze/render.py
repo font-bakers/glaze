@@ -42,6 +42,10 @@ def render(*args, num_pts=256):
         Each array must have shape [*, 3, 2]
     num_pts : int
         Number of points to raster per curve.
+
+    Return
+    ------
+    fig : matplotlib.pyplot.Figure
     """
     glyph = validate_glyph(args)
 
@@ -54,5 +58,8 @@ def render(*args, num_pts=256):
         for curve in contour:
             curve = bezier.Curve(curve, degree=2)
             curve.plot(num_pts=num_pts, ax=ax)
+
+    ax.set_xlim(-0.3, 1.2)
+    ax.set_ylim(-0.3, 1.2)
 
     return fig

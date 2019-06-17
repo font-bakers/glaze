@@ -117,3 +117,9 @@ Thumbs.db
 *.swp
 *.swo
 *.dSYM/
+
+# Generated images
+*.png
+*.jpg
+*.jpeg
+*.pdf
