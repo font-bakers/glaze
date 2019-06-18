@@ -81,9 +81,7 @@ def get_output_filename(font_path, font_name, glyph_name):
     elif glyph_name in LOWERCASES:
         glyph_name += "_lower"
 
-    output_filename = os.path.join(
-        font_path, font_name + "." + glyph_name + "." + FLAGS.format
-    )
+    output_filename = os.path.join(font_path, font_name + "." + glyph_name + ".png")
     if FLAGS.output:
         _, filename = os.path.split(output_filename)
         output_filename = os.path.join(FLAGS.output, filename)

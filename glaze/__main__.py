@@ -11,13 +11,11 @@ from .utils import read_json, get_output_filename
 
 FLAGS = flags.FLAGS
 
-FILE_FORMATS = ["png", "jpg", "pdf"]
 LOG_LEVELS = ["debug", "info", "warning", "error", "critical"]
 
 flags.DEFINE_string("input", None, "Path to input file. Must be a .json file.")
 flags.mark_flag_as_required("input")
 flags.DEFINE_string("output", None, "Output.")
-flags.DEFINE_enum("format", "png", FILE_FORMATS, "Format.")
 flags.DEFINE_enum(
     "loglevel", "critical", LOG_LEVELS, "Logging level. Defaults to `logging.CRITICAL`."
 )
@@ -61,18 +59,24 @@ def visualize(argv):
     if FLAGS.output and not os.path.exists(FLAGS.output):
         os.mkdir(FLAGS.output)
 
-    num_visualizations = 0
+    num_renders = 0
     num_exceptions = 0
     for font_name, glyph_name, glyph in tqdm(glyphs):
         try:
             output_filename = get_output_filename(font_path, font_name, glyph_name)
             fig = render(glyph)
             plt.savefig(output_filename)
-            plt.close(fig)
-            num_visualizations += 1
+            num_renders += 1
         except Exception:
-            logger.exception("Failed to visualize {} {}.".format(font_name, glyph_name))
+            logger.exception("Failed to render {} {}.".format(font_name, glyph_name))
             num_exceptions += 1
+        finally:
+            plt.close(fig)
+
+    msg = "Successfully rendered {} ({:.2f}%) glyph(s). See log file for details.\n".format(
+        num_renders, 100 * num_renders / (num_renders + num_exceptions)
+    )
+    print(msg)
 
 
 def main():

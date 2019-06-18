@@ -7,4 +7,5 @@ nav:
     - About:
       - Code of Conduct: https://github.com/font-bakers/glaze/blob/master/CODE_OF_CONDUCT.md
       - License: https://github.com/font-bakers/glaze/blob/master/LICENSE
+      - PyPI: https://pypi.org/project/glaze/
 theme: readthedocs

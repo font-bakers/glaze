@@ -8,13 +8,10 @@ The latest release of `glaze` can be installed from PyPI:
 pip install glaze
 ```
 
-The bleeding edge development branch of `glaze` can be cloned from GitHub:
+The bleeding edge development branch of `glaze` can be installed from GitHub:
 
 ```bash
-git clone https://github.com/font-bakers/glaze/
-cd glaze/
-pip install -r requirements.txt
-pip install -e .
+pip install git+https://github.com/font-bakers/glaze.git
 ```
 
 ## Usage
@@ -25,15 +22,18 @@ To use `glaze` as a library:
 import matplotlib.pyplot as plt
 from glaze import render
 
-render(contours)  # Visualize a vector glyph
+fig = render(contours)  # Render one glyph
 ```
 
-For more information, see the documentation for the `render` function.
+For more information, see [the docstring for the `render`
+function](https://github.com/font-bakers/glaze/blob/master/glaze/render.py).
+(Note that while `glaze` does contain other modules and functions, the only
+thing of any practical value is the `render` function).
 
 To run `glaze` on the command line:
 
 ```bash
-glaze --input INPUT [--output OUTPUT_PATH --format FORMAT]
+glaze --input INPUT [--output OUTPUT]
 ```
 
 `--input` is a `.json` file (such as those produced by `knead`), or a directory
@@ -42,5 +42,6 @@ containing such `.json` files.
 `--output` is the path to the desired location of the output images. If
 `--output` is not specified, it defaults to the present working directory.
 
-`--format` is the format in which the image should be saved. Must be one of
-`jpg`, `png` or `pdf`.
+In the event of a fatal error during rendering, `glaze` will simply catch the
+exception and write the error message (along with a stack trace) to a
+`glaze.log` file.

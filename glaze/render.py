@@ -3,10 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def validate_glyph(args):
-    """
-    Whatever the input is, return a list of correctly-shaped contours.
-    """
+def _validate_glyph(args):
+    """ Whatever the input is, return a list of correctly-shaped contours. """
     if len(args) == 1 and isinstance(args[0], list):
         glyph = args[0]
     else:
@@ -38,16 +36,35 @@ def render(*args, num_pts=256, xlim=[-0.3, 1.2], ylim=[-0.3, 1.2]):
 
     Parameters
     ----------
-    glyph : list of numpy arrays
-        Each array must have shape [*, 3, 2]
+    *args
+        Up to three np.ndarrays, where each array has shape [*, 3, 2], or a list
+        of such np.ndarrays.
     num_pts : int
-        Number of points to raster per curve.
+        Number of points per Bezier curve.
+    xlim, ylim : lists
+        x and y limits. Both default to [-0.3, 1.2].
 
-    Return
-    ------
+    Returns
+    -------
     fig : matplotlib.pyplot.Figure
+        Rendered glyph.
+
+    Examples
+    --------
+    ```python
+    import numpy as np
+    from glaze import render
+
+    contour1 = np.random.randn(10, 3, 2)
+    contour2 = np.random.randn(7, 3, 2)
+    contour3 = np.random.randn(5, 3, 2)
+
+    # The following are equivalent.
+    fig = render(contour1, contour2, contour3)
+    fig = render([contour1, contour2, contour3])
+    ```
     """
-    glyph = validate_glyph(args)
+    glyph = _validate_glyph(args)
 
     fig = plt.figure()
     ax = plt.gca()

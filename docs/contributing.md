@@ -80,9 +80,10 @@ documentation](https://packaging.python.org/tutorials/packaging-projects/).
     configuration](https://github.com/font-bakers/glaze/blob/master/.travis.yml)
     for more details.
 
-- `glaze` contains integration tests in the form of the [`test.sh`
-  script](https://github.com/font-bakers/glaze/blob/master/scripts/test.sh).
-  `glaze` is currently not unit tested.
+- `glaze` is [unit
+  tested](https://github.com/font-bakers/glaze/blob/master/glaze/tests/test_render.py)
+  through `pytest`, and integration tested through the [`test_cli.sh`
+  script](https://github.com/font-bakers/glaze/blob/master/glaze/tests/test_cli.sh).
 
 - The `glaze` documentation is generated using `mkdocs`. See the
   [`mkdocs.yml`](https://github.com/font-bakers/glaze/blob/master/mkdocs.yml)
