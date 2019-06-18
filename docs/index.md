@@ -5,3 +5,13 @@
 ---
 
 Welcome to the `glaze` documentation, and happy baking!
+
+## How to read this documentation
+
+**I have some algorithmically-generated glyphs, and want to render them.** Check
+out the [quickstart](https://font-bakers.github.io/glaze/quickstart/) for
+installation and usage instructions.
+
+**I want to contribute to `glaze`.** Check out the [contributing
+guide](https://font-bakers.github.io/knead/contributing/) for details on how to
+make a contribution.

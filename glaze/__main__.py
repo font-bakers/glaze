@@ -55,6 +55,12 @@ def visualize(argv):
     elif os.path.isfile(FLAGS.input):
         glyphs = read_json(FLAGS.input)
         font_path, _ = os.path.split(FLAGS.input)
+    else:
+        msg = (
+            "--input not understood. Expected .json file or directory of "
+            ".json files, got {}".format(FLAGS.input)
+        )
+        raise ValueError(msg)
 
     if FLAGS.output and not os.path.exists(FLAGS.output):
         os.mkdir(FLAGS.output)
@@ -64,14 +70,14 @@ def visualize(argv):
     for font_name, glyph_name, glyph in tqdm(glyphs):
         try:
             output_filename = get_output_filename(font_path, font_name, glyph_name)
-            fig = render(glyph)
+            render(glyph)
             plt.savefig(output_filename)
             num_renders += 1
         except Exception:
             logger.exception("Failed to render {} {}.".format(font_name, glyph_name))
             num_exceptions += 1
         finally:
-            plt.close(fig)
+            plt.close("all")
 
     msg = "Successfully rendered {} ({:.2f}%) glyph(s). See log file for details.\n".format(
         num_renders, 100 * num_renders / (num_renders + num_exceptions)
