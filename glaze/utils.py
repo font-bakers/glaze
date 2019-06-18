@@ -43,24 +43,27 @@ def read_json(filename):
 
     Returns
     -------
-    A dictionary of lists of np.ndarrays. Each item in the dictionary is one
-    glyph: a list of contours, where each contour is an np.ndarray with shape
-    (num_curves, 3, 2).
+    A lists of 3-tuples. Each tuple consists of the font name (a string), the
+    glyph name (a string), and a list of np.ndarrays, each representing one
+    contour and having shape (num_curves, 3, 2).
     """
+    _, font_file = os.path.split(filename)
+    font_name, _ = os.path.splitext(font_file)
+
     with open(filename, "r") as f:
         json_dict = json.load(f)
 
-    font_np = {}
+    glyphs = []
     for glyph_name, glyph in json_dict.items():
         contours_np = []
         for contour in glyph:
             contours_np.append(np.asarray(contour))
-        font_np[glyph_name] = contours_np
+        glyphs.append((font_name, glyph_name, contours_np))
 
-    return font_np
+    return glyphs
 
 
-def get_output_filename(font_path, glyph_name):
+def get_output_filename(font_path, font_name, glyph_name):
     """
     Parameters
     ----------
@@ -78,7 +81,9 @@ def get_output_filename(font_path, glyph_name):
     elif glyph_name in LOWERCASES:
         glyph_name += "_lower"
 
-    output_filename = font_path + "." + glyph_name + "." + FLAGS.format
+    output_filename = os.path.join(
+        font_path, font_name + "." + glyph_name + "." + FLAGS.format
+    )
     if FLAGS.output:
         _, filename = os.path.split(output_filename)
         output_filename = os.path.join(FLAGS.output, filename)

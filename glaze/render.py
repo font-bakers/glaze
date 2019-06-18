@@ -32,7 +32,7 @@ def validate_glyph(args):
     return glyph
 
 
-def render(*args, num_pts=256):
+def render(*args, num_pts=256, xlim=[-0.3, 1.2], ylim=[-0.3, 1.2]):
     """
     Renders one glyph.
 
@@ -51,7 +51,6 @@ def render(*args, num_pts=256):
 
     fig = plt.figure()
     ax = plt.gca()
-    ax.axis("off")
 
     for contour in glyph:
         contour = np.transpose(contour, axes=(0, 2, 1)).astype(np.float64)
@@ -59,7 +58,8 @@ def render(*args, num_pts=256):
             curve = bezier.Curve(curve, degree=2)
             curve.plot(num_pts=num_pts, ax=ax)
 
-    ax.set_xlim(-0.3, 1.2)
-    ax.set_ylim(-0.3, 1.2)
+    ax.axis("off")
+    ax.set_xlim(*xlim)
+    ax.set_ylim(*ylim)
 
     return fig

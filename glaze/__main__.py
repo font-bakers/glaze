@@ -1,5 +1,6 @@
 #!/bin/python
 
+from glob import glob
 import os
 import logging
 from absl import flags, app
@@ -47,23 +48,30 @@ def setup_logging():
 
 def visualize(argv):
     logger = setup_logging()
-    font_dict = read_json(FLAGS.input)
-    font_path, _ = os.path.splitext(FLAGS.input)
+
+    if os.path.isdir(FLAGS.input):
+        glyphs = []
+        for json_file in glob(os.path.join(FLAGS.input, "*.json")):
+            glyphs.extend(read_json(json_file))
+        font_path = FLAGS.input
+    elif os.path.isfile(FLAGS.input):
+        glyphs = read_json(FLAGS.input)
+        font_path, _ = os.path.split(FLAGS.input)
 
     if FLAGS.output and not os.path.exists(FLAGS.output):
         os.mkdir(FLAGS.output)
 
     num_visualizations = 0
     num_exceptions = 0
-    for glyph_name, glyph in tqdm(font_dict.items()):
+    for font_name, glyph_name, glyph in tqdm(glyphs):
         try:
-            output_filename = get_output_filename(font_path, glyph_name)
+            output_filename = get_output_filename(font_path, font_name, glyph_name)
             fig = render(glyph)
             plt.savefig(output_filename)
             plt.close(fig)
             num_visualizations += 1
         except Exception:
-            logger.exception("Failed to visualize {} {}".format(font_path, glyph_name))
+            logger.exception("Failed to visualize {} {}.".format(font_name, glyph_name))
             num_exceptions += 1
 
 

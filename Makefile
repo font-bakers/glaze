@@ -44,7 +44,7 @@ lint: lint-black lint-pylint  # Check code style with black and pylint.
 test: clean  # Run tests.
 	@printf "Running test script...\n"
 	pytest
-	${SHELL} scripts/test.sh
+	${SHELL} glaze/tests/test_cli.sh
 	@printf "\033[1;34mTests pass!\033[0m\n\n"
 
 check: clean lint test  # Alias for `make clean lint test`.
@@ -53,7 +53,7 @@ black:  # Format code in-place with black.
 	black glaze/ --target-version=py35
 
 clean:  # Clean project directories.
-	rm -rf dist/ site/ __pycache__/ *.log
+	rm -rf dist/ site/ __pycache__/ *.log data/img/ data/*.png
 	find glaze/ -type d -name "__pycache__" -exec rm -rf {} +
 	find glaze/ -type d -name "__pycache__" -delete
 	find glaze/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
