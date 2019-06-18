@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 NAME = "glaze"
 MAINTAINER = "The Font Bakers"
-DESCRIPTION = ""
+DESCRIPTION = "A Python library and command line tool for rendering algorithmically-generated fonts and typefaces."
 LICENSE = "MIT"
 URL = "https://github.com/font-bakers/glaze"
 PROJECT_URLS = {

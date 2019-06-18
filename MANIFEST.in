@@ -1,0 +1,5 @@
+recursive-include data/ *
+recursive-include docs/ *
+recursive-include glaze/tests/ *
+include scripts/*.sh
+include requirements.txt

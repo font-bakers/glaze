@@ -40,7 +40,7 @@ fig = render(contours)  # Render one glyph
 To run `glaze` on the command line:
 
 ```bash
-glaze --input INPUT [--output OUTPUT_PATH --format FORMAT]
+glaze --input INPUT [--output OUTPUT]
 ```
 
 `--input` is a `.json` file (such as those produced by `knead`), or a directory
@@ -48,9 +48,6 @@ containing such `.json` files.
 
 `--output` is the path to the desired location of the output images. If
 `--output` is not specified, it defaults to the present working directory.
-
-`--format` is the format in which the image should be saved. It must be one of
-`jpg`, `png` or `pdf`.
 
 Refer to our [quickstart](https://font-bakers.github.io/glaze/quickstart/) for
 more information on how to use `glaze`.
