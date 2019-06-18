@@ -33,15 +33,29 @@ thing of any practical value is the `render` function).
 To run `glaze` on the command line:
 
 ```bash
-glaze --input INPUT [--output OUTPUT]
+glaze --input PATH/TO/INPUT
 ```
 
 `--input` is a `.json` file (such as those produced by `knead`), or a directory
 containing such `.json` files.
 
-`--output` is the path to the desired location of the output images. If
-`--output` is not specified, it defaults to the present working directory.
+See more optional flags below.
 
 In the event of a fatal error during rendering, `glaze` will simply catch the
 exception and write the error message (along with a stack trace) to a
 `glaze.log` file.
+
+## Optional Flags
+
+`--output` is the path to the desired location of the output images. If
+`--output` is not specified, it defaults to the present working directory.
+
+`--num_points` is the number of points to sample per Bezier curve. Defaults to
+32.
+
+`--lim` is the x and y limits of the rendered glyph. This flags is passed as
+comma-separated values, e.g. `glaze --input MyFont.json --lim -0.2,1.3`.
+Defaults to [-0.3, 1.2].
+
+`--grid` is whether to overlay the axes and gridlines on the rendered glyph.
+Defaults to False.

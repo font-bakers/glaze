@@ -1,6 +1,6 @@
 __version__ = "0.1.0"
 
 from .render import render
-from . import utils
+from .utils import read_json
 
-__all__ = ["render"]
+__all__ = ["read_json", "render"]

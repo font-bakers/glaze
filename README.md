@@ -12,11 +12,26 @@ algorithmically-generated fonts and typefaces.
 
 ## Table of Contents
 
+- [Demo](#Demo)
 - [Installation](#Installation)
 - [Usage](#Usage)
 - [Documentation](#Documentation)
 - [Contributing](#Contributing)
 - [License](#License)
+
+## Demo
+
+```python
+>>> import matplotlib.pyplot as plt
+>>> from glaze import read_json, render
+>>>
+>>> font = read_json("data/Georgia.json")
+>>> font_name, glyph_name, glyph = font[0]
+>>> render(glyph)
+>>> plt.show()
+```
+
+<img src="https://raw.githubusercontent.com/font-bakers/glaze/master/docs/img/Georgia.g_lower.png" alt="Rendered glyph (lowercase g)" title="Rendered glyph" align="center"></img>
 
 ## Installation
 

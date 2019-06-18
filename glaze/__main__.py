@@ -15,7 +15,18 @@ LOG_LEVELS = ["debug", "info", "warning", "error", "critical"]
 
 flags.DEFINE_string("input", None, "Path to input file. Must be a .json file.")
 flags.mark_flag_as_required("input")
-flags.DEFINE_string("output", None, "Output.")
+flags.DEFINE_string(
+    "output", None, "Path to output. Defaults to present working directory."
+)
+flags.DEFINE_integer(
+    "num_points", 32, "Number of points per Bezier curve. Defaults to 32."
+)
+flags.DEFINE_list(
+    "lim", [-0.3, 1.2], "x and y limits for rendered glyphs. Defaults to [-0.3, 1.2]"
+)
+flags.DEFINE_boolean(
+    "grid", False, "If True, plots axes and gridlines. Defaults to False."
+)
 flags.DEFINE_enum(
     "loglevel", "critical", LOG_LEVELS, "Logging level. Defaults to `logging.CRITICAL`."
 )
@@ -65,12 +76,14 @@ def visualize(argv):
     if FLAGS.output and not os.path.exists(FLAGS.output):
         os.mkdir(FLAGS.output)
 
+    FLAGS.lim = [float(i) for i in FLAGS.lim]
+
     num_renders = 0
     num_exceptions = 0
     for font_name, glyph_name, glyph in tqdm(glyphs):
         try:
             output_filename = get_output_filename(font_path, font_name, glyph_name)
-            render(glyph)
+            render(glyph, num_points=FLAGS.num_points, lim=FLAGS.lim, grid=FLAGS.grid)
             plt.savefig(output_filename)
             num_renders += 1
         except Exception:

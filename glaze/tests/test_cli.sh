@@ -12,7 +12,7 @@ else
 fi
 echo
 
-glaze --input data/ --output data/img/
+glaze --input data/ --output data/img/ --grid
 NUMPNGS2=$(find data/img/ -type f -name "*.png" | wc -l)
 if [ $NUMPNGS2 != 69 ]
 then
