@@ -53,15 +53,14 @@ exception and write the error message (along with a stack trace) to a
 
 ## Optional Flags
 
-`--output` is the path to the desired location of the output images. If
-`--output` is not specified, it defaults to the present working directory.
+1. `--output`: Path to the desired location of the output renders. Defaults to
+   the present working directory.
 
-`--num_points` is the number of points to sample per Bezier curve. Defaults to
-32.
+2. `--num_points`: Number of points to sample per Bezier curve. Defaults to 32.
 
-`--lim` is the x and y limits of the rendered glyph. This flags is passed as
-comma-separated values, e.g. `glaze --input MyFont.json --lim -0.2,1.3`.
-Defaults to [-0.3, 1.2].
+3. `--lim`: x and y limits of the rendered glyph. This flags is passed as
+   comma-separated values, e.g. `glaze --input MyFont.json --lim -0.2,1.3`.
+   Defaults to [-0.3, 1.2].
 
-`--grid` is whether to overlay the axes and gridlines on the rendered glyph.
-Defaults to False.
+4. `--grid`: If True, overlays the axes and gridlines on the rendered glyph.
+   Defaults to False.
