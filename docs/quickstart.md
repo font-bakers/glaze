@@ -16,21 +16,26 @@ pip install git+https://github.com/font-bakers/glaze.git
 
 ## Usage
 
-To use `glaze` as a library:
+### In Python
 
 ```python
-import matplotlib.pyplot as plt
-from glaze import render
-
-fig = render(contours)  # Render one glyph
+>>> import matplotlib.pyplot as plt
+>>> from glaze import read_json, render
+>>>
+>>> font = read_json("data/Georgia.json")  # Returns a list of 3-tuples
+>>> font_name, glyph_name, glyph = font[0]
+>>> render(glyph)  # Renders one glyph
+>>> plt.show()
 ```
 
-For more information, see [the docstring for the `render`
+For more information, see the docstrings for [the `read_json`
+function](https://github.com/font-bakers/glaze/blob/master/glaze/utils.py) and
+[the `render`
 function](https://github.com/font-bakers/glaze/blob/master/glaze/render.py).
 (Note that while `glaze` does contain other modules and functions, the only
-thing of any practical value is the `render` function).
+things of any practical value are the `render` and `read_json` functions).
 
-To run `glaze` on the command line:
+### On the command line
 
 ```bash
 glaze --input PATH/TO/INPUT
@@ -39,7 +44,8 @@ glaze --input PATH/TO/INPUT
 `--input` is a `.json` file (such as those produced by `knead`), or a directory
 containing such `.json` files.
 
-See more optional flags below.
+For more information on optional flags, refer to [the section
+below](#optional-flags).
 
 In the event of a fatal error during rendering, `glaze` will simply catch the
 exception and write the error message (along with a stack trace) to a
