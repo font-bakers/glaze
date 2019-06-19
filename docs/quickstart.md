@@ -41,8 +41,8 @@ things of any practical value are the `render` and `read_json` functions).
 glaze --input PATH/TO/INPUT
 ```
 
-`--input` is a `.json` file (such as those produced by `knead`), or a directory
-containing such `.json` files.
+`--input` must be a `.json` file (such as those produced by `knead`), or a
+directory containing such `.json` files.
 
 For more information on optional flags, refer to [the section
 below](#optional-flags).
