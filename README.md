@@ -77,9 +77,9 @@ glaze --files FILES
 
 1. However, should you want to render only a few files, you can use the
    `--files` flag, which must be one of:
-  * a path to a `.json` file (again, such as those produced by `knead`),
-  * a comma-separated list of such paths, or
-  * a regex matching the path(s) to one or more `.json` files.
+    * a path to a `.json` file (again, such as those produced by `knead`),
+    * a comma-separated list of such paths, or
+    * a regex matching the path(s) to one or more `.json` files.
 
   Renders will be saved in the present working directory (unless [the `--output`
   flag](https://font-bakers.github.io/glaze/quickstart/#optional-flags) is
