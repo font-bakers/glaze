@@ -64,16 +64,16 @@ glaze --files FILES
 
 1. The `--directory` must have the following structure:
 
-  ```bash
-  data
-  ├── json
-  │   ├── Georgia.json
-  │   └── ...
-  └── ...
-  ```
+   ```bash
+   data
+   ├── json
+   │   ├── Georgia.json
+   │   └── ...
+   └── ...
+   ```
 
-  where the `.json` files are those produced by `knead`. Renders will be saved
-  in a directory `data/renders-TTTT-DD-MM/`, where `TTTT` is military time.
+   where the `.json` files are those produced by `knead`. Renders will be saved
+   in a directory `data/renders-TTTT-DD-MM/`, where `TTTT` is military time.
 
 1. However, should you want to render only a few files, you can use the
    `--files` flag, which must be one of:

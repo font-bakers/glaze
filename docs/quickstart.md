@@ -47,26 +47,26 @@ glaze --files FILES
 
 1. The `--directory` must have the following structure:
 
-  ```bash
-  data
-  ├── json
-  │   ├── Georgia.json
-  │   └── ...
-  └── ...
-  ```
+   ```bash
+   data
+   ├── json
+   │   ├── Georgia.json
+   │   └── ...
+   └── ...
+   ```
 
-  where the `.json` files are those produced by `knead`. Renders will be saved
-  in a directory `data/renders-TTTT-DD-MM/`, where `TTTT` is military time.
+   where the `.json` files are those produced by `knead`. Renders will be saved
+   in a directory `data/renders-TTTT-DD-MM/`, where `TTTT` is military time.
 
-  _In other words, `--directory` is not the directory containing the `.json`
-  files. It is a directory that contains a subdirectory (called `json`)
-  containing the `.json` files._
+   _In other words, `--directory` is not the directory containing the `.json`
+   files. It is a directory that contains a subdirectory (called `json`)
+   containing the `.json` files._
 
-  Using this flag is the recommended way to use `glaze`, as it preserves the
-  same data model that `knead` does. That is, each directory contains only
-  subdirectories with the same data in various different data formats. In this
-  way, each directory can be semantically associated with a single data set,
-  irrespective of its data format.
+   Using this flag is the recommended way to use `glaze`, as it preserves the
+   same data model that `knead` does. That is, each directory contains only
+   subdirectories with the same data in various different data formats. In this
+   way, each directory can be semantically associated with a single data set,
+   irrespective of its data format.
 
 1. However, should you want to render only a few files, you can use the
    `--files` flag, which must be one of:
