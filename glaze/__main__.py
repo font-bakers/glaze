@@ -1,6 +1,7 @@
 #!/bin/python
 
 from glob import glob
+from datetime import datetime
 import os
 import logging
 from absl import flags, app
@@ -13,8 +14,8 @@ FLAGS = flags.FLAGS
 
 LOG_LEVELS = ["debug", "info", "warning", "error", "critical"]
 
-flags.DEFINE_string("input", None, "Path to input file. Must be a .json file.")
-flags.mark_flag_as_required("input")
+flags.DEFINE_string("directory", None, "Directory.")
+flags.DEFINE_list("files", None, "Files.")
 flags.DEFINE_string(
     "output", None, "Path to output. Defaults to present working directory."
 )
@@ -58,23 +59,25 @@ def setup_logging():
 def visualize(argv):
     logger = setup_logging()
 
-    if os.path.isdir(FLAGS.input):
-        glyphs = []
-        for json_file in glob(os.path.join(FLAGS.input, "*.json")):
-            glyphs.extend(read_json(json_file))
-        font_path = FLAGS.input
-    elif os.path.isfile(FLAGS.input):
-        glyphs = read_json(FLAGS.input)
-        font_path, _ = os.path.split(FLAGS.input)
-    else:
-        msg = (
-            "--input not understood. Expected .json file or directory of "
-            ".json files, got {}".format(FLAGS.input)
-        )
+    if bool(FLAGS.directory) == bool(FLAGS.files):
+        msg = "Exactly one of `--directory` and `--files` must be specified."
         raise ValueError(msg)
 
-    if FLAGS.output and not os.path.exists(FLAGS.output):
-        os.mkdir(FLAGS.output)
+    if FLAGS.directory:
+        glyphs = []
+        for filename in glob(os.path.join(FLAGS.directory, "json/*")):
+            glyphs.extend(read_json(filename))
+        time = datetime.now().strftime("%H%M-%d-%m")
+        output_dir = os.path.join(FLAGS.directory, "renders-{}".format(time))
+    elif FLAGS.files:
+        glyphs = []
+        for regex in FLAGS.files:
+            for filename in glob(regex):
+                glyphs.extend(read_json(filename))
+        output_dir = FLAGS.output if FLAGS.output else os.getcwd()
+
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
 
     FLAGS.lim = [float(i) for i in FLAGS.lim]
 
@@ -82,7 +85,7 @@ def visualize(argv):
     num_exceptions = 0
     for font_name, glyph_name, glyph in tqdm(glyphs):
         try:
-            output_filename = get_output_filename(font_path, font_name, glyph_name)
+            output_filename = get_output_filename(output_dir, font_name, glyph_name)
             render(glyph, num_points=FLAGS.num_points, lim=FLAGS.lim, grid=FLAGS.grid)
             plt.savefig(output_filename)
             num_renders += 1

@@ -12,12 +12,12 @@ algorithmically-generated fonts and typefaces.
 
 ## Table of Contents
 
-- [Demo](#Demo)
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Documentation](#Documentation)
-- [Contributing](#Contributing)
-- [License](#License)
+* [Demo](#Demo)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Documentation](#Documentation)
+* [Contributing](#Contributing)
+* [License](#License)
 
 ## Demo
 
@@ -55,14 +55,35 @@ fig = render(contours)  # Render one glyph
 To run `glaze` on the command line:
 
 ```bash
-glaze --input INPUT [--output OUTPUT]
+# Recommended usage
+glaze --directory PATH/TO/DATA/
+
+# Alternative usage
+glaze --files FILES
 ```
 
-`--input` is a `.json` file (such as those produced by `knead`), or a directory
-containing such `.json` files.
+1. The `--directory` must have the following structure:
 
-`--output` is the path to the desired location of the output images. If
-`--output` is not specified, it defaults to the present working directory.
+  ```bash
+  data
+  ├── json
+  │   ├── Georgia.json
+  │   └── ...
+  └── ...
+  ```
+
+  where the `.json` files are those produced by `knead`. Renders will be saved
+  in a directory `data/renders-TTTT-DD-MM/`, where `TTTT` is military time.
+
+1. However, should you want to render only a few files, you can use the
+   `--files` flag, which must be one of:
+  * a path to a `.json` file (again, such as those produced by `knead`),
+  * a comma-separated list of such paths, or
+  * a regex matching the path(s) to one or more `.json` files.
+
+  Renders will be saved in the present working directory (unless [the `--output`
+  flag](https://font-bakers.github.io/glaze/quickstart/#optional-flags) is
+  passed).
 
 Refer to our [quickstart](https://font-bakers.github.io/glaze/quickstart/) for
 more information on how to use `glaze`.

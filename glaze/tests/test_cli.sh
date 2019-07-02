@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-glaze --input data/Georgia.json
+glaze --directory data/
 NUMPNGS1=$(find data/ -type f -name "*.png" | wc -l)
 if [ $NUMPNGS1 != 69 ]
 then
@@ -12,8 +12,8 @@ else
 fi
 echo
 
-glaze --input data/ --output data/img/ --grid
-NUMPNGS2=$(find data/img/ -type f -name "*.png" | wc -l)
+glaze --files data/json/* --output data/renders/ --grid
+NUMPNGS2=$(find data/renders/ -type f -name "*.png" | wc -l)
 if [ $NUMPNGS2 != 69 ]
 then
     echo "Test failed on second command."

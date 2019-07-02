@@ -38,11 +38,45 @@ things of any practical value are the `render` and `read_json` functions).
 ### On the command line
 
 ```bash
-glaze --input PATH/TO/INPUT
+# Recommended usage
+glaze --directory PATH/TO/DATA/
+
+# Alternative usage
+glaze --files FILES
 ```
 
-`--input` must be a `.json` file (such as those produced by `knead`), or a
-directory containing such `.json` files.
+1. The `--directory` must have the following structure:
+
+  ```bash
+  data
+  ├── json
+  │   ├── Georgia.json
+  │   └── ...
+  └── ...
+  ```
+
+  where the `.json` files are those produced by `knead`. Renders will be saved
+  in a directory `data/renders-TTTT-DD-MM/`, where `TTTT` is military time.
+
+  _In other words, `--directory` is not the directory containing the `.json`
+  files. It is a directory that contains a subdirectory (called `json`)
+  containing the `.json` files._
+
+  Using this flag is the recommended way to use `glaze`, as it preserves the
+  same data model that `knead` does. That is, each directory contains only
+  subdirectories with the same data in various different data formats. In this
+  way, each directory can be semantically associated with a single data set,
+  irrespective of its data format.
+
+1. However, should you want to render only a few files, you can use the
+   `--files` flag, which must be one of:
+  * a path to a `.json` file (again, such as those produced by `knead`),
+  * a comma-separated list of such paths, or
+  * a regex matching the path(s) to one or more `.json` files.
+
+  Renders will be saved in the present working directory (unless [the `--output`
+  flag](https://font-bakers.github.io/glaze/quickstart/#optional-flags) is
+  passed).
 
 For more information on optional flags, refer to [the section
 below](#optional-flags).
@@ -54,13 +88,13 @@ exception and write the error message (along with a stack trace) to a
 ## Optional Flags
 
 1. `--output`: Path to the desired location of the output renders. Defaults to
-   the present working directory.
+   the present working directory. Only used if `--files` is passed.
 
-2. `--num_points`: Number of points to sample per Bezier curve. Defaults to 32.
+1. `--num_points`: Number of points to sample per Bezier curve. Defaults to 32.
 
-3. `--lim`: x and y limits of the rendered glyph. This flags is passed as
+1. `--lim`: x and y limits of the rendered glyph. This flags is passed as
    comma-separated values, e.g. `glaze --input MyFont.json --lim -0.2,1.3`.
    Defaults to [-0.3, 1.2].
 
-4. `--grid`: If True, overlays the axes and gridlines on the rendered glyph.
+1. `--grid`: If True, overlays the axes and gridlines on the rendered glyph.
    Defaults to False.

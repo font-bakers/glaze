@@ -63,13 +63,13 @@ def read_json(filename):
     return glyphs
 
 
-def get_output_filename(font_path, font_name, glyph_name):
+def get_output_filename(output_dir, font_name, glyph_name):
     """
     Parameters
     ----------
-    font_path, glyph_name : strings
-        Names of font and glyph, respectively.
-        E.g. "data/Georgia" and "A", respectively.
+    output_dir, glyph_name : strings
+        Output directory and names of font and glyph, respectively.
+        E.g. "data/", "Georgia" and "A", respectively.
 
     Returns
     -------
@@ -81,7 +81,7 @@ def get_output_filename(font_path, font_name, glyph_name):
     elif glyph_name in LOWERCASES:
         glyph_name += "_lower"
 
-    output_filename = os.path.join(font_path, font_name + "." + glyph_name + ".png")
+    output_filename = os.path.join(output_dir, font_name + "." + glyph_name + ".png")
     if FLAGS.output:
         _, filename = os.path.split(output_filename)
         output_filename = os.path.join(FLAGS.output, filename)

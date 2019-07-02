@@ -69,22 +69,22 @@ documentation](https://packaging.python.org/tutorials/packaging-projects/).
 
 ## Miscellaneous development details
 
-- `glaze` adopts the [Semantic Versioning
+* `glaze` adopts the [Semantic Versioning
   2.0.0](https://semver.org/#semantic-versioning-200) specification.
 
-- `glaze` targets Python 3.5+ (specifically, 3.5.2+) compatibility.
+* `glaze` targets Python 3.5+ (specifically, 3.5.2+) compatibility.
 
-- `glaze` uses `black` and `pylint` to format and lint code, respectively.
-  - However, `black` requires Python 3.6+ to run. Thus, we test in Python 3.5
+* `glaze` uses `black` and `pylint` to format and lint code, respectively.
+  * However, `black` requires Python 3.6+ to run. Thus, we test in Python 3.5
     but lint in Python 3.6. See our [Travis
     configuration](https://github.com/font-bakers/glaze/blob/master/.travis.yml)
     for more details.
 
-- `glaze` is [unit
+* `glaze` is [unit
   tested](https://github.com/font-bakers/glaze/blob/master/glaze/tests/test_render.py)
   through `pytest`, and integration tested through the [`test_cli.sh`
   script](https://github.com/font-bakers/glaze/blob/master/glaze/tests/test_cli.sh).
 
-- The `glaze` documentation is generated using `mkdocs`. See the
+* The `glaze` documentation is generated using `mkdocs`. See the
   [`mkdocs.yml`](https://github.com/font-bakers/glaze/blob/master/mkdocs.yml)
   configuration for more details.

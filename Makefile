@@ -53,10 +53,10 @@ black:  # Format code in-place with black.
 	black glaze/ --target-version=py35
 
 clean:  # Clean project directories.
-	rm -rf dist/ site/ __pycache__/ *.log data/img/ data/*.png
+	rm -rf dist/ site/ __pycache__/ *.log data/renders*
 	find glaze/ -type d -name "__pycache__" -exec rm -rf {} +
 	find glaze/ -type d -name "__pycache__" -delete
-	find glaze/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
+	find glaze/ -type f \( -name "*.pyc" -o -name "*.log" -o -name "*.png" \) -delete
 
 package: clean  # Package glaze in preparation for releasing to PyPI.
 	${PYTHON} setup.py sdist bdist_wheel
